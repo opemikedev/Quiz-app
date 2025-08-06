@@ -1,11 +1,18 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { quiz } from "../data";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
-const shuffleArray = (array: any[]) => {
+interface QuizQuestion {
+  id: number;
+  question: string;
+  answers: string[];
+  correctAnswer: string;
+  category?: string;
+}
+const shuffleArray = (array: QuizQuestion[]) => {
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -43,8 +50,8 @@ const Page = () => {
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
     null
   );
-  const [attempts, setAttempts] = useState<number>(0);
-  const [quizStarted, setQuizStarted] = useState<boolean>(false);
+  // const [attempts, setAttempts] = useState<number>(0);
+  // const [quizStarted, setQuizStarted] = useState<boolean>(false);
 
   const [showResult, setShowResult] = useState(false);
   const [timeLeft, setTimeLeft] = useState(10);
@@ -110,6 +117,25 @@ const Page = () => {
     setIsTimerRunning(true);
   };
 
+  const handleTimeExposed = useCallback(() => {
+    if (questionHandleRef.current) return;
+    questionHandleRef.current = true;
+
+    setIsTimerRunning(false);
+    setResult((prev) => ({ ...prev, wrongAnswers: prev.wrongAnswers + 1 }));
+    setSelectedAnswerIndex(null);
+    setChecked(false);
+
+    if (activeQuestion < shuffledQuestions.length - 1) {
+      setTimeout(() => {
+        setActiveQuestion((prev) => prev + 1);
+        setIsTimerRunning(true);
+      }, 500);
+    } else {
+      setShowResult(true);
+    }
+  }, [activeQuestion, shuffledQuestions.length]);
+
   useEffect(() => {
     if (!isTimerRunning || showResult) return;
 
@@ -128,26 +154,7 @@ const Page = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [activeQuestion, isTimerRunning, showResult]);
-
-  const handleTimeExposed = () => {
-    if (questionHandleRef.current) return;
-    questionHandleRef.current = true;
-
-    setIsTimerRunning(false);
-    setResult((prev) => ({ ...prev, wrongAnswers: prev.wrongAnswers + 1 }));
-    setSelectedAnswerIndex(null);
-    setChecked(false);
-
-    if (activeQuestion < shuffledQuestions.length - 1) {
-      setTimeout(() => {
-        setActiveQuestion((prev) => prev + 1);
-        setIsTimerRunning(true);
-      }, 500);
-    } else {
-      setShowResult(true);
-    }
-  };
+  }, [activeQuestion, isTimerRunning, showResult, handleTimeExposed]);
 
   return (
     <div className="min-h-screen py-12 px-4 relative">
