@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +26,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
       >
-        {children}
+        <div>
+          <Image
+            src="/union/union.jpeg"
+            width={100}
+            height={100}
+            className="mt-2 z-20"
+            alt=""
+          />
+        </div>
+        <div className="container mx-auto flex-grow"> {children}</div>
       </body>
     </html>
   );
