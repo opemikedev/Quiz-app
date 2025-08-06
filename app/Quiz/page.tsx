@@ -24,21 +24,21 @@ const getResultMessage = (percentage: number) => {
   if (percentage >= 90)
     return {
       message: "🏆 Union Master! Perfect score! 1",
-      image: "/union/union.png",
+      image: "/union/PerfectSmile.png",
     };
   if (percentage >= 75)
     return {
       message: "🌟 Great job! Almost perfect!",
-      image: "/union/bears.png",
+      image: "/union/closePerfectSmile.png",
     };
   if (percentage >= 50)
     return {
       message: "📚 Solid effort! Keep going!",
-      image: "/union/bears.png",
+      image: "union/closeAnger.png",
     };
   return {
-    message: "😡 Go and study more abiut union",
-    image: "/union/bears.png",
+    message: "😡 Go and study more about union",
+    image: "/union/angry.png",
   };
 };
 

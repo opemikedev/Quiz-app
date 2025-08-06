@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,14 +29,24 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
       >
-        <div>
+        <div
+          className="flex
+        justify-between pt-1 px-3 border border-[#4BB7C3]"
+        >
           <Image
             src="/union/union.jpeg"
             width={100}
             height={100}
-            className="mt-2 z-20"
+            className="mt-2 z-20 object-contain "
             alt=""
           />
+          <div className="font-mono font-bold">
+            <h1>Built by</h1>
+            <Link href="https://x.com/Opeoluw6" className="font-bold">
+              @Opeoluw6{" "}
+            </Link>
+            &<Link href="https://x.com/o_pdev"> @o_pdev </Link>
+          </div>
         </div>
         <div className="container mx-auto flex-grow"> {children}</div>
       </body>
