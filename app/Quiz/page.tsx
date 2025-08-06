@@ -37,7 +37,7 @@ const getResultMessage = (percentage: number) => {
       image: "/union/bears.png",
     };
   return {
-    message: "💡 Good start! Try again!",
+    message: "😡 Go and study more abiut union",
     image: "/union/bears.png",
   };
 };
