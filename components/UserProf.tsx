@@ -3,8 +3,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import Link from "next/link";
-import { Router } from "next/router";
+
 import { useRouter } from "next/navigation";
 const SUPABASE_URL = "https://bvvlqbtwqetltdcvioie.supabase.co/rest/v1";
 const SUPABASE_APIKEY =
@@ -72,7 +71,6 @@ const UserProf = ({ username }: { username: string }) => {
         <p>⚡ Level: {userData.level}</p>
       </div>
       <Button
-        variant="primary"
         className="bg-[#4BB7C3] mt-5 hover:bg-[#4bb7c395] text-white font-medium py-2 px-4 rounded-2xl transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#4bb7c395] focus:ring-offset-2"
         onClick={() =>
           router.push(
