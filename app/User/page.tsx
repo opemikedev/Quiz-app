@@ -3,7 +3,7 @@
 import UserProf from "@/components/UserProf";
 import { useState } from "react";
 
-const page = () => {
+const Page = () => {
   const [username, Setusername] = useState("");
   const [submittedUsername, setSubmittedUsername] = useState("");
 
@@ -42,4 +42,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
