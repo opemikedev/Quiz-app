@@ -17,6 +17,8 @@ type SupabaseUser = {
 type ParsedJsonInput = {
   pfp: string;
   jsonInput: string;
+  title: string;
+  level: string;
 };
 
 const UserProf = ({ username }: { username: string }) => {
