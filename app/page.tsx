@@ -50,7 +50,7 @@ export default function Home() {
 
         {/* Button with hover effect */}
         <Link
-          href="/Quiz"
+          href="/User"
           className={`transition-transform duration-300 hover:scale-105 ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}

@@ -4,6 +4,7 @@ import { quiz } from "../data";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 interface QuizQuestion {
   id: number;
@@ -43,6 +44,9 @@ const getResultMessage = (percentage: number) => {
 };
 
 const Page = () => {
+  const searchParams = useSearchParams();
+  const username = searchParams.get("username");
+  const pfp = searchParams.get("pfp");
   const [shuffledQuestions, setShuffledQuestions] = useState(quiz.questions);
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(false);
@@ -182,10 +186,23 @@ const Page = () => {
                   / {shuffledQuestions.length}
                 </span>
               </h2>
+              <div className="flex items-center justify-center gap-1">
+                {pfp && (
+                  <Image
+                    src={pfp}
+                    height={100}
+                    width={100}
+                    className="w-5 h-5 rounded-full"
+                    alt=""
+                  />
+                )}
+                <h1>{username}</h1>
+              </div>
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full bg-[#4BB7C3] flex items-center justify-center">
                   <span className="text-xs font-bold">{timeLeft}</span>
                 </div>
+
                 <span>sec</span>
               </div>
             </div>
@@ -261,7 +278,19 @@ const Page = () => {
               transition={{ duration: 0.5 }}
               className="text-center text-white"
             >
-              <h3 className="text-2xl font-bold mb-6">Quiz Results</h3>
+              <div className="flex items-center justify-center gap-1 mb-4">
+                {pfp && (
+                  <Image
+                    src={pfp}
+                    height={100}
+                    width={100}
+                    className="w-8 h-8 rounded-full"
+                    alt=""
+                  />
+                )}
+                <h1 className="font-bold">{username}</h1>
+              </div>
+              <h3 className="text-2xl font-bold mb-6">Quiz Result</h3>
 
               {(() => {
                 const resultData = getResultMessage(
